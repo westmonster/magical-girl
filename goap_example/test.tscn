@@ -1,0 +1,121 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://goap_example/test.gd" type="Script" id=1]
+[ext_resource path="res://goap_example/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/goap/action_planner.gd" type="Script" id=3]
+[ext_resource path="res://addons/goap/action.gd" type="Script" id=4]
+[ext_resource path="res://goap_example/camera.tscn" type="PackedScene" id=5]
+[ext_resource path="res://goap_example/axe/axe.tscn" type="PackedScene" id=6]
+[ext_resource path="res://goap_example/box/box_wood.tscn" type="PackedScene" id=7]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 200, 1, 200 )
+
+[sub_resource type="PlaneMesh" id=2]
+size = Vector2( 400, 400 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.531036, 1, 0.503906, 1 )
+roughness = 0.0
+
+[sub_resource type="ProceduralSky" id=4]
+sky_top_color = Color( 0.0470588, 0.454902, 0.976471, 1 )
+sky_horizon_color = Color( 0.556863, 0.823529, 0.909804, 1 )
+sky_curve = 0.25
+ground_bottom_color = Color( 0.101961, 0.145098, 0.188235, 1 )
+ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
+ground_curve = 0.01
+sun_energy = 16.0
+
+[sub_resource type="Environment" id=5]
+background_mode = 2
+background_sky = SubResource( 4 )
+ambient_light_color = Color( 0.0664063, 0.0664063, 0.0664063, 1 )
+
+[node name="Test" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Ground" type="StaticBody" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0368819, -0.0549746, -0.0415215 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.41494, -0.0522956, -0.44091 )
+collision_layer = 2
+collision_mask = 2
+run_speed = 10.0
+
+[node name="ActionPlanner" type="Node" parent="Player"]
+script = ExtResource( 3 )
+
+[node name="store_wood" type="Node" parent="Player/ActionPlanner"]
+script = ExtResource( 4 )
+action = "store_wood"
+preconditions = "has_wood sees_box"
+effect = "!has_wood wood_stored"
+
+[node name="cut_tree" type="Node" parent="Player/ActionPlanner"]
+script = ExtResource( 4 )
+action = "cut_tree"
+preconditions = "has_axe sees_tree"
+effect = "sees_wood sees_fruit"
+
+[node name="pickup_wood" type="Node" parent="Player/ActionPlanner"]
+script = ExtResource( 4 )
+action = "pickup_wood"
+preconditions = "sees_wood !has_wood"
+effect = "has_wood !has_fruit !has_axe"
+
+[node name="pickup_fruit" type="Node" parent="Player/ActionPlanner"]
+script = ExtResource( 4 )
+action = "pickup_fruit"
+preconditions = "sees_fruit !has_fruit"
+effect = "has_fruit !has_axe !has_wood"
+
+[node name="pickup_axe" type="Node" parent="Player/ActionPlanner"]
+script = ExtResource( 4 )
+action = "pickup_axe"
+preconditions = "sees_axe !has_axe"
+effect = "has_axe !has_fruit !has_wood"
+
+[node name="grow_tree" type="Node" parent="Player/ActionPlanner"]
+script = ExtResource( 4 )
+action = "grow_tree"
+preconditions = "has_fruit"
+effect = "!has_fruit sees_growing_tree"
+
+[node name="eat_fruit" type="Node" parent="Player/ActionPlanner"]
+script = ExtResource( 4 )
+action = "eat_fruit"
+preconditions = "has_fruit"
+effect = "!has_fruit !hungry"
+
+[node name="wait" type="Node" parent="Player/ActionPlanner"]
+script = ExtResource( 4 )
+action = "wait"
+preconditions = "sees_growing_tree"
+effect = "sees_tree"
+cost = 10.0
+
+[node name="Camera" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 0.977484, 0.211009, 0, -0.211009, 0.977484, -6.45134, 2.65919, 8.04673 )
+environment = SubResource( 5 )
+
+[node name="Sun" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -0.340126, 0.94038, 0, -0.94038, -0.340126, -4.41494, 15.4977, -0.44091 )
+shadow_enabled = true
+
+[node name="Axe" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.00444228, -0.99999, 0, 0.99999, 0.00444228, 0.029772, 0.0990074, -2.88898 )
+
+[node name="Box" parent="." instance=ExtResource( 7 )]
+

@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/plainCyan.png-d7122f2f918fca87b6fbf20b81552b37.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://textures/walls/plainCyan.png"
+dest_files=[ "res://.import/plainCyan.png-d7122f2f918fca87b6fbf20b81552b37.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=true
+flags/filter=false
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=1
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

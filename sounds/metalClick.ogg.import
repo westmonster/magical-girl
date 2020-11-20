@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/metalClick.ogg-6d5193086189de0ada847a666ca9b35e.oggstr"
+
+[deps]
+
+source_file="res://sounds/metalClick.ogg"
+dest_files=[ "res://.import/metalClick.ogg-6d5193086189de0ada847a666ca9b35e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

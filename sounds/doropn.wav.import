@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/doropn.wav-04300ae19317a737d866401f1b1e2deb.sample"
+
+[deps]
+
+source_file="res://sounds/doropn.wav"
+dest_files=[ "res://.import/doropn.wav-04300ae19317a737d866401f1b1e2deb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

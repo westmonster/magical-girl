@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/aqf023.png-e80ad426fc9baf50e60c5e61f0915425.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://textures/freedoom/aqf023.png"
+dest_files=[ "res://.import/aqf023.png-e80ad426fc9baf50e60c5e61f0915425.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=1
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

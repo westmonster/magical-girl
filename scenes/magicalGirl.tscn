@@ -1,0 +1,374 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://scripts/magicalGirl.gd" type="Script" id=1]
+[ext_resource path="res://scenes/items/weapons/mgWand/magicalGirlWand.tscn" type="PackedScene" id=2]
+[ext_resource path="res://textures/HUD/crosshair.png" type="Texture" id=3]
+[ext_resource path="res://scripts/GUI_Elements/Crosshair.gd" type="Script" id=4]
+[ext_resource path="res://textures/HUD/crosshair_usable.png" type="Texture" id=5]
+[ext_resource path="res://scripts/GUI_Elements/DEBUG.gd" type="Script" id=6]
+[ext_resource path="res://fonts/germania_48.tres" type="DynamicFont" id=7]
+[ext_resource path="res://scripts/GUI_Elements/Debug_Label.gd" type="Script" id=8]
+[ext_resource path="res://textures/HUD/stopWatch.png" type="Texture" id=9]
+[ext_resource path="res://fonts/germania.tres" type="DynamicFont" id=10]
+[ext_resource path="res://textures/HUD/blu_key.png" type="Texture" id=11]
+[ext_resource path="res://textures/HUD/potion.png" type="Texture" id=12]
+[ext_resource path="res://textures/HUD/ylw_key.png" type="Texture" id=13]
+[ext_resource path="res://textures/HUD/red_key.png" type="Texture" id=14]
+[ext_resource path="res://textures/HUD/wht_key.png" type="Texture" id=15]
+[ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=16]
+[ext_resource path="res://fonts/Cowboy_Hippie_Pro.otf" type="DynamicFontData" id=17]
+[ext_resource path="res://fonts/GermaniaOne-Regular.ttf" type="DynamicFontData" id=18]
+[ext_resource path="res://textures/sprites/shadow_blob.png" type="Texture" id=19]
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+
+[sub_resource type="ArrayMesh" id=2]
+surfaces/0 = {
+"aabb": AABB( -0.691102, -0.9, -0.256339, 1.3822, 1.8, 0.456339 ),
+"array_data": PoolByteArray( 185, 178, 51, 187, 102, 178, 0, 60, 0, 129, 0, 0, 185, 50, 51, 187, 102, 50, 0, 60, 0, 129, 0, 0, 185, 178, 51, 187, 102, 50, 0, 60, 0, 129, 0, 0, 48, 182, 107, 54, 102, 50, 0, 60, 209, 117, 12, 0, 157, 184, 192, 53, 69, 175, 0, 60, 209, 117, 12, 0, 157, 184, 81, 53, 47, 48, 0, 60, 209, 117, 12, 0, 48, 54, 107, 54, 102, 50, 0, 60, 0, 0, 127, 0, 48, 182, 136, 41, 102, 50, 0, 60, 0, 0, 127, 0, 48, 54, 136, 41, 102, 50, 0, 60, 0, 0, 127, 0, 48, 182, 107, 54, 102, 50, 0, 60, 139, 47, 0, 0, 250, 177, 51, 59, 82, 176, 0, 60, 139, 47, 0, 0, 48, 182, 107, 54, 102, 178, 0, 60, 139, 47, 0, 0, 48, 54, 208, 183, 102, 178, 0, 60, 116, 206, 0, 0, 185, 50, 51, 187, 102, 50, 0, 60, 116, 206, 0, 0, 185, 50, 51, 187, 102, 178, 0, 60, 116, 206, 0, 0, 48, 182, 136, 41, 102, 178, 0, 60, 0, 0, 129, 0, 48, 54, 107, 54, 102, 178, 0, 60, 0, 0, 129, 0, 48, 54, 136, 41, 102, 178, 0, 60, 0, 0, 129, 0, 185, 178, 51, 187, 102, 50, 0, 60, 140, 206, 0, 0, 48, 182, 208, 183, 102, 178, 0, 60, 140, 206, 0, 0, 185, 178, 51, 187, 102, 178, 0, 60, 140, 206, 0, 0, 48, 54, 107, 54, 102, 50, 0, 60, 27, 124, 0, 0, 157, 56, 192, 53, 69, 175, 0, 60, 27, 124, 0, 0, 48, 54, 107, 54, 102, 178, 0, 60, 27, 124, 0, 0, 48, 182, 208, 183, 102, 50, 0, 60, 129, 0, 0, 0, 48, 182, 136, 41, 102, 178, 0, 60, 129, 0, 0, 0, 48, 182, 208, 183, 102, 178, 0, 60, 129, 0, 0, 0, 48, 182, 208, 183, 102, 178, 0, 60, 0, 0, 130, 0, 48, 54, 136, 41, 102, 178, 0, 60, 0, 0, 130, 0, 48, 54, 208, 183, 102, 178, 0, 60, 0, 0, 130, 0, 48, 54, 208, 183, 102, 50, 0, 60, 0, 0, 127, 0, 185, 178, 51, 187, 102, 50, 0, 60, 0, 0, 127, 0, 185, 50, 51, 187, 102, 50, 0, 60, 0, 0, 127, 0, 185, 178, 51, 187, 102, 178, 0, 60, 0, 0, 129, 0, 48, 54, 208, 183, 102, 178, 0, 60, 0, 0, 129, 0, 185, 50, 51, 187, 102, 178, 0, 60, 0, 0, 129, 0, 48, 182, 107, 54, 102, 178, 0, 60, 0, 16, 131, 0, 250, 49, 51, 59, 82, 176, 0, 60, 0, 16, 131, 0, 48, 54, 107, 54, 102, 178, 0, 60, 0, 16, 131, 0, 250, 177, 51, 59, 82, 176, 0, 60, 0, 127, 0, 0, 250, 49, 51, 59, 82, 48, 0, 60, 0, 127, 0, 0, 250, 49, 51, 59, 82, 176, 0, 60, 0, 127, 0, 0, 48, 54, 136, 41, 102, 178, 0, 60, 127, 0, 0, 0, 48, 54, 208, 183, 102, 50, 0, 60, 127, 0, 0, 0, 48, 54, 208, 183, 102, 178, 0, 60, 127, 0, 0, 0, 48, 182, 107, 54, 102, 50, 0, 60, 0, 16, 125, 0, 250, 49, 51, 59, 82, 48, 0, 60, 0, 16, 125, 0, 250, 177, 51, 59, 82, 48, 0, 60, 0, 16, 125, 0, 48, 54, 107, 54, 102, 178, 0, 60, 117, 47, 0, 0, 250, 49, 51, 59, 82, 48, 0, 60, 117, 47, 0, 0, 48, 54, 107, 54, 102, 50, 0, 60, 117, 47, 0, 0, 135, 185, 45, 44, 55, 174, 0, 60, 138, 46, 5, 0, 157, 184, 81, 53, 47, 48, 0, 60, 138, 46, 5, 0, 157, 184, 192, 53, 69, 175, 0, 60, 138, 46, 5, 0, 48, 182, 136, 41, 102, 178, 0, 60, 204, 0, 141, 0, 157, 184, 192, 53, 69, 175, 0, 60, 204, 0, 141, 0, 48, 182, 107, 54, 102, 178, 0, 60, 204, 0, 141, 0, 48, 182, 136, 41, 102, 50, 0, 60, 241, 19, 124, 0, 157, 184, 81, 53, 47, 48, 0, 60, 241, 19, 124, 0, 135, 185, 110, 38, 61, 49, 0, 60, 241, 19, 124, 0, 135, 185, 45, 44, 55, 174, 0, 60, 250, 37, 135, 0, 140, 183, 158, 182, 25, 180, 0, 60, 250, 37, 135, 0, 217, 184, 232, 182, 17, 180, 0, 60, 250, 37, 135, 0, 140, 183, 55, 183, 26, 173, 0, 60, 16, 133, 230, 0, 217, 184, 232, 182, 17, 180, 0, 60, 16, 133, 230, 0, 140, 183, 158, 182, 25, 180, 0, 60, 16, 133, 230, 0, 135, 185, 110, 38, 61, 49, 0, 60, 247, 195, 110, 0, 140, 183, 55, 183, 26, 173, 0, 60, 247, 195, 110, 0, 48, 182, 136, 41, 102, 50, 0, 60, 247, 195, 110, 0, 135, 185, 45, 44, 55, 174, 0, 60, 131, 237, 253, 0, 217, 184, 134, 183, 61, 173, 0, 60, 131, 237, 253, 0, 135, 185, 110, 38, 61, 49, 0, 60, 131, 237, 253, 0, 48, 182, 136, 41, 102, 178, 0, 60, 124, 234, 252, 0, 140, 183, 55, 183, 26, 173, 0, 60, 124, 234, 252, 0, 140, 183, 158, 182, 25, 180, 0, 60, 124, 234, 252, 0, 135, 57, 45, 44, 55, 174, 0, 60, 118, 44, 6, 0, 157, 56, 81, 53, 47, 48, 0, 60, 118, 44, 6, 0, 135, 57, 110, 38, 61, 49, 0, 60, 118, 44, 6, 0, 157, 56, 192, 53, 69, 175, 0, 60, 52, 0, 141, 0, 48, 54, 136, 41, 102, 178, 0, 60, 52, 0, 141, 0, 48, 54, 107, 54, 102, 178, 0, 60, 52, 0, 141, 0, 48, 54, 136, 41, 102, 50, 0, 60, 43, 0, 119, 0, 157, 56, 81, 53, 47, 48, 0, 60, 43, 0, 119, 0, 48, 54, 107, 54, 102, 50, 0, 60, 43, 0, 119, 0, 135, 57, 45, 44, 55, 174, 0, 60, 38, 21, 138, 0, 140, 55, 158, 182, 25, 180, 0, 60, 38, 21, 138, 0, 48, 54, 136, 41, 102, 178, 0, 60, 38, 21, 138, 0, 217, 56, 232, 182, 17, 180, 0, 60, 240, 133, 230, 0, 140, 55, 55, 183, 26, 173, 0, 60, 240, 133, 230, 0, 140, 55, 158, 182, 25, 180, 0, 60, 240, 133, 230, 0, 140, 55, 55, 183, 26, 173, 0, 60, 9, 195, 110, 0, 135, 57, 110, 38, 61, 49, 0, 60, 9, 195, 110, 0, 48, 54, 136, 41, 102, 50, 0, 60, 9, 195, 110, 0, 217, 56, 134, 183, 61, 173, 0, 60, 125, 237, 253, 0, 135, 57, 45, 44, 55, 174, 0, 60, 125, 237, 253, 0, 135, 57, 110, 38, 61, 49, 0, 60, 125, 237, 253, 0, 48, 54, 136, 41, 102, 178, 0, 60, 131, 235, 0, 0, 140, 55, 55, 183, 26, 173, 0, 60, 131, 235, 0, 0, 48, 54, 136, 41, 102, 50, 0, 60, 131, 235, 0, 0, 48, 54, 136, 41, 102, 50, 0, 60, 0, 0, 127, 0, 48, 182, 208, 183, 102, 50, 0, 60, 0, 0, 127, 0, 48, 54, 208, 183, 102, 50, 0, 60, 0, 0, 127, 0, 185, 178, 51, 187, 102, 178, 0, 60, 0, 129, 0, 0, 185, 50, 51, 187, 102, 178, 0, 60, 0, 129, 0, 0, 185, 50, 51, 187, 102, 50, 0, 60, 0, 129, 0, 0, 48, 182, 107, 54, 102, 50, 0, 60, 229, 124, 0, 0, 48, 182, 107, 54, 102, 178, 0, 60, 229, 124, 0, 0, 157, 184, 192, 53, 69, 175, 0, 60, 229, 124, 0, 0, 48, 182, 107, 54, 102, 50, 0, 60, 0, 0, 127, 0, 48, 182, 107, 54, 102, 50, 0, 60, 139, 47, 0, 0, 250, 177, 51, 59, 82, 48, 0, 60, 139, 47, 0, 0, 250, 177, 51, 59, 82, 176, 0, 60, 139, 47, 0, 0, 48, 54, 208, 183, 102, 178, 0, 60, 116, 206, 0, 0, 48, 54, 208, 183, 102, 50, 0, 60, 116, 206, 0, 0, 185, 50, 51, 187, 102, 50, 0, 60, 116, 206, 0, 0, 48, 182, 107, 54, 102, 178, 0, 60, 0, 0, 129, 0, 185, 178, 51, 187, 102, 50, 0, 60, 140, 206, 0, 0, 48, 182, 208, 183, 102, 50, 0, 60, 140, 206, 0, 0, 48, 182, 208, 183, 102, 178, 0, 60, 140, 206, 0, 0, 48, 54, 107, 54, 102, 50, 0, 60, 47, 117, 12, 0, 157, 56, 81, 53, 47, 48, 0, 60, 47, 117, 12, 0, 157, 56, 192, 53, 69, 175, 0, 60, 47, 117, 12, 0, 48, 182, 208, 183, 102, 50, 0, 60, 129, 0, 0, 0, 48, 182, 136, 41, 102, 50, 0, 60, 129, 0, 0, 0, 48, 182, 136, 41, 102, 178, 0, 60, 129, 0, 0, 0, 48, 182, 208, 183, 102, 178, 0, 60, 0, 0, 129, 0, 48, 182, 136, 41, 102, 178, 0, 60, 0, 0, 129, 0, 48, 54, 136, 41, 102, 178, 0, 60, 0, 0, 129, 0, 48, 54, 208, 183, 102, 50, 0, 60, 0, 0, 127, 0, 48, 182, 208, 183, 102, 50, 0, 60, 0, 0, 127, 0, 185, 178, 51, 187, 102, 50, 0, 60, 0, 0, 127, 0, 185, 178, 51, 187, 102, 178, 0, 60, 0, 0, 129, 0, 48, 182, 208, 183, 102, 178, 0, 60, 0, 0, 129, 0, 48, 54, 208, 183, 102, 178, 0, 60, 0, 0, 129, 0, 48, 182, 107, 54, 102, 178, 0, 60, 0, 16, 131, 0, 250, 177, 51, 59, 82, 176, 0, 60, 0, 16, 131, 0, 250, 49, 51, 59, 82, 176, 0, 60, 0, 16, 131, 0, 250, 177, 51, 59, 82, 176, 0, 60, 0, 126, 0, 0, 250, 177, 51, 59, 82, 48, 0, 60, 0, 126, 0, 0, 250, 49, 51, 59, 82, 48, 0, 60, 0, 126, 0, 0, 48, 54, 136, 41, 102, 178, 0, 60, 127, 0, 0, 0, 48, 54, 136, 41, 102, 50, 0, 60, 127, 0, 0, 0, 48, 54, 208, 183, 102, 50, 0, 60, 127, 0, 0, 0, 48, 182, 107, 54, 102, 50, 0, 60, 0, 16, 125, 0, 48, 54, 107, 54, 102, 50, 0, 60, 0, 16, 125, 0, 250, 49, 51, 59, 82, 48, 0, 60, 0, 16, 125, 0, 48, 54, 107, 54, 102, 178, 0, 60, 117, 47, 0, 0, 250, 49, 51, 59, 82, 176, 0, 60, 117, 47, 0, 0, 250, 49, 51, 59, 82, 48, 0, 60, 117, 47, 0, 0, 135, 185, 45, 44, 55, 174, 0, 60, 138, 44, 6, 0, 135, 185, 110, 38, 61, 49, 0, 60, 138, 44, 6, 0, 157, 184, 81, 53, 47, 48, 0, 60, 138, 44, 6, 0, 48, 182, 136, 41, 102, 178, 0, 60, 216, 8, 136, 0, 135, 185, 45, 44, 55, 174, 0, 60, 216, 8, 136, 0, 157, 184, 192, 53, 69, 175, 0, 60, 216, 8, 136, 0, 48, 182, 136, 41, 102, 50, 0, 60, 213, 0, 119, 0, 48, 182, 107, 54, 102, 50, 0, 60, 213, 0, 119, 0, 157, 184, 81, 53, 47, 48, 0, 60, 213, 0, 119, 0, 135, 185, 45, 44, 55, 174, 0, 60, 218, 21, 138, 0, 48, 182, 136, 41, 102, 178, 0, 60, 218, 21, 138, 0, 140, 183, 158, 182, 25, 180, 0, 60, 218, 21, 138, 0, 140, 183, 55, 183, 26, 173, 0, 60, 18, 134, 229, 0, 217, 184, 134, 183, 61, 173, 0, 60, 18, 134, 229, 0, 217, 184, 232, 182, 17, 180, 0, 60, 18, 134, 229, 0, 135, 185, 110, 38, 61, 49, 0, 60, 6, 201, 114, 0, 217, 184, 134, 183, 61, 173, 0, 60, 6, 201, 114, 0, 140, 183, 55, 183, 26, 173, 0, 60, 6, 201, 114, 0, 135, 185, 45, 44, 55, 174, 0, 60, 131, 236, 252, 0, 217, 184, 232, 182, 17, 180, 0, 60, 131, 236, 252, 0, 217, 184, 134, 183, 61, 173, 0, 60, 131, 236, 252, 0, 48, 182, 136, 41, 102, 178, 0, 60, 125, 235, 0, 0, 48, 182, 136, 41, 102, 50, 0, 60, 125, 235, 0, 0, 140, 183, 55, 183, 26, 173, 0, 60, 125, 235, 0, 0, 135, 57, 45, 44, 55, 174, 0, 60, 118, 46, 5, 0, 157, 56, 192, 53, 69, 175, 0, 60, 118, 46, 5, 0, 157, 56, 81, 53, 47, 48, 0, 60, 118, 46, 5, 0, 157, 56, 192, 53, 69, 175, 0, 60, 40, 8, 136, 0, 135, 57, 45, 44, 55, 174, 0, 60, 40, 8, 136, 0, 48, 54, 136, 41, 102, 178, 0, 60, 40, 8, 136, 0, 48, 54, 136, 41, 102, 50, 0, 60, 15, 19, 124, 0, 135, 57, 110, 38, 61, 49, 0, 60, 15, 19, 124, 0, 157, 56, 81, 53, 47, 48, 0, 60, 15, 19, 124, 0, 135, 57, 45, 44, 55, 174, 0, 60, 6, 37, 135, 0, 217, 56, 232, 182, 17, 180, 0, 60, 6, 37, 135, 0, 140, 55, 158, 182, 25, 180, 0, 60, 6, 37, 135, 0, 217, 56, 232, 182, 17, 180, 0, 60, 238, 134, 229, 0, 217, 56, 134, 183, 61, 173, 0, 60, 238, 134, 229, 0, 140, 55, 55, 183, 26, 173, 0, 60, 238, 134, 229, 0, 140, 55, 55, 183, 26, 173, 0, 60, 250, 201, 114, 0, 217, 56, 134, 183, 61, 173, 0, 60, 250, 201, 114, 0, 135, 57, 110, 38, 61, 49, 0, 60, 250, 201, 114, 0, 217, 56, 134, 183, 61, 173, 0, 60, 125, 236, 252, 0, 217, 56, 232, 182, 17, 180, 0, 60, 125, 236, 252, 0, 135, 57, 45, 44, 55, 174, 0, 60, 125, 236, 252, 0, 48, 54, 136, 41, 102, 178, 0, 60, 132, 234, 252, 0, 140, 55, 158, 182, 25, 180, 0, 60, 132, 234, 252, 0, 140, 55, 55, 183, 26, 173, 0, 60, 132, 234, 252, 0, 48, 54, 136, 41, 102, 50, 0, 60, 0, 0, 126, 0, 48, 182, 136, 41, 102, 50, 0, 60, 0, 0, 126, 0, 48, 182, 208, 183, 102, 50, 0, 60, 0, 0, 126, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 3, 0, 5, 0, 4, 0, 6, 0, 8, 0, 7, 0, 9, 0, 11, 0, 10, 0, 12, 0, 14, 0, 13, 0, 15, 0, 17, 0, 16, 0, 18, 0, 20, 0, 19, 0, 21, 0, 23, 0, 22, 0, 24, 0, 26, 0, 25, 0, 27, 0, 29, 0, 28, 0, 30, 0, 32, 0, 31, 0, 33, 0, 35, 0, 34, 0, 36, 0, 38, 0, 37, 0, 39, 0, 41, 0, 40, 0, 42, 0, 44, 0, 43, 0, 45, 0, 47, 0, 46, 0, 48, 0, 50, 0, 49, 0, 51, 0, 53, 0, 52, 0, 54, 0, 56, 0, 55, 0, 57, 0, 59, 0, 58, 0, 60, 0, 62, 0, 61, 0, 63, 0, 65, 0, 64, 0, 66, 0, 68, 0, 67, 0, 69, 0, 71, 0, 70, 0, 72, 0, 74, 0, 73, 0, 75, 0, 77, 0, 76, 0, 78, 0, 80, 0, 79, 0, 81, 0, 83, 0, 82, 0, 84, 0, 86, 0, 85, 0, 87, 0, 89, 0, 88, 0, 90, 0, 92, 0, 91, 0, 93, 0, 95, 0, 94, 0, 96, 0, 98, 0, 97, 0, 99, 0, 101, 0, 100, 0, 102, 0, 104, 0, 103, 0, 105, 0, 107, 0, 106, 0, 6, 0, 7, 0, 108, 0, 109, 0, 111, 0, 110, 0, 112, 0, 114, 0, 113, 0, 15, 0, 16, 0, 115, 0, 116, 0, 118, 0, 117, 0, 119, 0, 121, 0, 120, 0, 122, 0, 124, 0, 123, 0, 125, 0, 127, 0, 126, 0, 128, 0, 130, 0, 129, 0, 131, 0, 133, 0, 132, 0, 134, 0, 136, 0, 135, 0, 137, 0, 139, 0, 138, 0, 140, 0, 142, 0, 141, 0, 143, 0, 145, 0, 144, 0, 146, 0, 148, 0, 147, 0, 149, 0, 151, 0, 150, 0, 152, 0, 154, 0, 153, 0, 155, 0, 157, 0, 156, 0, 158, 0, 160, 0, 159, 0, 161, 0, 163, 0, 162, 0, 164, 0, 166, 0, 165, 0, 167, 0, 169, 0, 168, 0, 170, 0, 172, 0, 171, 0, 173, 0, 175, 0, 174, 0, 176, 0, 178, 0, 177, 0, 179, 0, 181, 0, 180, 0, 182, 0, 184, 0, 183, 0, 185, 0, 187, 0, 186, 0, 188, 0, 190, 0, 189, 0, 191, 0, 193, 0, 192, 0, 194, 0, 196, 0, 195, 0, 197, 0, 199, 0, 198, 0 ),
+"blend_shape_data": [  ],
+"format": 98051,
+"index_count": 204,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 200
+}
+
+[sub_resource type="SpatialMaterial" id=3]
+params_diffuse_mode = 3
+albedo_color = Color( 0.839844, 0.25712, 0.196838, 1 )
+roughness = 0.8
+
+[sub_resource type="CapsuleShape" id=4]
+radius = 0.5
+height = 0.75
+
+[sub_resource type="DynamicFont" id=5]
+size = 64
+font_data = ExtResource( 17 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 64
+font_data = ExtResource( 18 )
+
+[node name="Player" type="KinematicBody"]
+collision/safe_margin = 0.01
+script = ExtResource( 1 )
+Cam_RotateSens = 0.125
+BaseWalkVelocity = 7
+ShiftWalkVelocity_Multiplier = 1.75
+BackwardMultiplier = 1.125
+StrafeMultiplier = 1.25
+Falling_Gravity = 8.0
+Falling_Speed_Multiplier_Default = 0.1
+Jump_Vel_RelativeToGrav = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 1 )
+
+[node name="FPC_Base_Mesh" type="MeshInstance" parent="."]
+visible = false
+layers = 524288
+use_in_baked_light = true
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="Camera_Main" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0 )
+cull_mask = 524287
+fov = 90.0
+far = 256.0
+
+[node name="loadout" type="Spatial" parent="Camera_Main"]
+
+[node name="magicalGirlWand" parent="Camera_Main/loadout" instance=ExtResource( 2 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.2125, -0.1 )
+
+[node name="muzzle" type="Spatial" parent="Camera_Main/loadout"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, -0.25, -0.55 )
+
+[node name="Muzzle" type="Spatial" parent="Camera_Main/loadout/muzzle"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+z_index = 128
+anchor_mode = 0
+
+[node name="Crosshair" type="TextureRect" parent="Camera2D"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = 430.0
+margin_right = 224.0
+margin_bottom = 686.0
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+script = ExtResource( 4 )
+
+[node name="Crosshair_Useable" type="TextureRect" parent="Camera2D/Crosshair"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+mouse_filter = 2
+texture = ExtResource( 5 )
+expand = true
+
+[node name="DEBUG" type="Control" parent="Camera2D"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 6 )
+
+[node name="Debug_Label" type="Label" parent="Camera2D/DEBUG"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 264.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 1, 0.411765, 0.705882, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "-------"
+script = ExtResource( 8 )
+
+[node name="HUD" type="Control" parent="Camera2D"]
+visible = false
+margin_top = 656.0
+margin_right = 1024.0
+margin_bottom = 720.0
+
+[node name="Panel" type="TextureRect" parent="Camera2D/HUD"]
+margin_right = 1024.0
+margin_bottom = 128.0
+stretch_mode = 2
+
+[node name="timer_icon" type="TextureRect" parent="Camera2D/HUD/Panel"]
+margin_left = 178.0
+margin_right = 242.0
+margin_bottom = 64.0
+texture = ExtResource( 9 )
+
+[node name="health" type="Label" parent="Camera2D/HUD/Panel/timer_icon"]
+margin_left = 64.0
+margin_right = 153.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 0.831373, 0.686275, 0.215686, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "00000000"
+align = 1
+valign = 1
+
+[node name="blu_key_icon" type="TextureRect" parent="Camera2D/HUD/Panel"]
+margin_left = 687.0
+margin_right = 751.0
+margin_bottom = 64.0
+texture = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="Camera2D/HUD/Panel/blu_key_icon"]
+margin_left = 64.0
+margin_right = 86.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 0.831373, 0.686275, 0.215686, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "00"
+align = 1
+valign = 1
+
+[node name="potion_icon" type="TextureRect" parent="Camera2D/HUD/Panel"]
+margin_left = 331.0
+margin_right = 395.0
+margin_bottom = 64.0
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Camera2D/HUD/Panel/potion_icon"]
+margin_left = 64.0
+margin_right = 86.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 0.831373, 0.686275, 0.215686, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "00"
+align = 1
+valign = 1
+
+[node name="ylw_key_icon" type="TextureRect" parent="Camera2D/HUD/Panel"]
+margin_left = 601.0
+margin_right = 665.0
+margin_bottom = 64.0
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="Camera2D/HUD/Panel/ylw_key_icon"]
+margin_left = 64.0
+margin_right = 86.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 0.831373, 0.686275, 0.215686, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "00"
+align = 1
+valign = 1
+
+[node name="red_key_icon" type="TextureRect" parent="Camera2D/HUD/Panel"]
+margin_left = 515.0
+margin_right = 579.0
+margin_bottom = 64.0
+texture = ExtResource( 14 )
+
+[node name="Label" type="Label" parent="Camera2D/HUD/Panel/red_key_icon"]
+margin_left = 64.0
+margin_right = 86.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 0.831373, 0.686275, 0.215686, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "00"
+align = 1
+valign = 1
+
+[node name="wht_key_icon" type="TextureRect" parent="Camera2D/HUD/Panel"]
+margin_left = 417.0
+margin_right = 481.0
+margin_bottom = 64.0
+texture = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="Camera2D/HUD/Panel/wht_key_icon"]
+margin_left = 65.0
+margin_right = 98.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 0.831373, 0.686275, 0.215686, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "000"
+align = 1
+valign = 1
+
+[node name="Score" type="Label" parent="Camera2D/HUD/Panel"]
+margin_left = 785.0
+margin_right = 850.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 0.831373, 0.686275, 0.215686, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "SCORE:"
+align = 1
+valign = 1
+
+[node name="Label" type="Label" parent="Camera2D/HUD/Panel/Score"]
+margin_left = 65.0
+margin_right = 105.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 0.831373, 0.686275, 0.215686, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "0000000000"
+valign = 1
+
+[node name="PauseMenu" type="Control" parent="Camera2D"]
+margin_left = 400.0
+margin_top = 200.0
+margin_right = 640.0
+margin_bottom = 520.0
+script = ExtResource( 16 )
+
+[node name="Panel" type="TextureRect" parent="Camera2D/PauseMenu"]
+margin_right = 240.0
+margin_bottom = 320.0
+expand = true
+stretch_mode = 2
+
+[node name="lbl_paused" type="Label" parent="Camera2D/PauseMenu/Panel"]
+margin_top = -8.0
+margin_right = 240.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 1, 0.411765, 0.705882, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "PAUSED"
+align = 1
+valign = 1
+
+[node name="btn_return" type="Button" parent="Camera2D/PauseMenu/Panel"]
+margin_top = 61.0
+margin_right = 240.0
+margin_bottom = 125.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 1, 0.411765, 0.705882, 1 )
+custom_colors/font_color_hover = Color( 0.988235, 0.658824, 0.988235, 1 )
+custom_colors/font_color_pressed = Color( 0.988235, 0.329412, 0.658824, 1 )
+text = "RETURN TO GAME"
+
+[node name="btn_back" type="Button" parent="Camera2D/PauseMenu/Panel"]
+margin_top = 126.0
+margin_right = 240.0
+margin_bottom = 190.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 1, 0.411765, 0.705882, 1 )
+custom_colors/font_color_hover = Color( 0.988235, 0.658824, 0.988235, 1 )
+custom_colors/font_color_pressed = Color( 0.988235, 0.329412, 0.658824, 1 )
+text = "BACK TO MENU"
+
+[node name="btn_options" type="Button" parent="Camera2D/PauseMenu/Panel"]
+margin_top = 191.0
+margin_right = 240.0
+margin_bottom = 255.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 1, 0.411765, 0.705882, 1 )
+custom_colors/font_color_hover = Color( 0.988235, 0.658824, 0.988235, 1 )
+custom_colors/font_color_pressed = Color( 0.988235, 0.329412, 0.658824, 1 )
+text = "OPTIONS"
+
+[node name="btn_quit" type="Button" parent="Camera2D/PauseMenu/Panel"]
+margin_top = 256.0
+margin_right = 240.0
+margin_bottom = 320.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 1, 0.411765, 0.705882, 1 )
+custom_colors/font_color_hover = Color( 0.988235, 0.658824, 0.988235, 1 )
+custom_colors/font_color_pressed = Color( 0.988235, 0.329412, 0.658824, 1 )
+text = "QUIT"
+
+[node name="lbl_Timer" type="Label" parent="Camera2D"]
+visible = false
+margin_left = 884.0
+margin_right = 1024.0
+margin_bottom = 75.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 0.8, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "0000"
+align = 1
+
+[node name="RayCast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -10, 0 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Shadow" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, -2.8213e-07, 1, 0, -1, -2.8213e-07, 0, 0, 0 )
+opacity = 0.9
+pixel_size = 0.02
+double_sided = false
+texture = ExtResource( 19 )
+[connection signal="pressed" from="Camera2D/PauseMenu/Panel/btn_return" to="Camera2D/PauseMenu" method="_on_btn_return_pressed"]
+[connection signal="pressed" from="Camera2D/PauseMenu/Panel/btn_back" to="Camera2D/PauseMenu" method="_on_btn_back_pressed"]
+[connection signal="pressed" from="Camera2D/PauseMenu/Panel/btn_options" to="Camera2D/PauseMenu" method="_on_btn_options_pressed"]
+[connection signal="pressed" from="Camera2D/PauseMenu/Panel/btn_quit" to="Camera2D/PauseMenu" method="_on_btn_quit_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

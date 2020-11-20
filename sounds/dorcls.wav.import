@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/dorcls.wav-5c059d16cef8a1ce2c1b8a70770f1a12.sample"
+
+[deps]
+
+source_file="res://sounds/dorcls.wav"
+dest_files=[ "res://.import/dorcls.wav-5c059d16cef8a1ce2c1b8a70770f1a12.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,212 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://scripts/Init_Script.gd" type="Script" id=1]
+[ext_resource path="res://textures/default.png" type="Texture" id=2]
+[ext_resource path="res://environment/planters/planterCap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://environment/planters/planterCorner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://environment/planters/planterMid.tscn" type="PackedScene" id=5]
+[ext_resource path="res://environment/planters/planter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://environment/bench/bench.tscn" type="PackedScene" id=7]
+[ext_resource path="res://environment/planters/planterTJoint.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/magicalGirl.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scripts/projectileManager.gd" type="Script" id=10]
+
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0, 1, 1, 1 )
+sky_horizon_color = Color( 1, 0.866667, 0.956863, 1 )
+sky_curve = 0.25
+ground_bottom_color = Color( 1, 0.866667, 0.956863, 1 )
+ground_horizon_color = Color( 1, 0.866667, 0.956863, 1 )
+ground_curve = 0.01
+sun_latitude = 45.0
+sun_longitude = -145.0
+sun_angle_min = 5.0
+sun_angle_max = 45.0
+sun_curve = 0.0450629
+sun_energy = 16.0
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_color = Color( 0.761719, 0.871552, 1, 1 )
+ambient_light_sky_contribution = 0.0
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 64, 1, 64 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 1, 8, 64 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 2 )
+roughness = 0.0
+
+[sub_resource type="PlaneMesh" id=6]
+material = SubResource( 5 )
+size = Vector2( 128, 128 )
+
+[node name="world" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.822975, 0.401692, -0.401692, 0, 0.707107, 0.707107, 0.568078, -0.581931, 0.581931, 0, 5, 0 )
+light_energy = 0.85
+
+[node name="geometry" type="Node" parent="."]
+
+[node name="floor" type="StaticBody" parent="geometry"]
+
+[node name="CollisionShape" type="CollisionShape" parent="geometry/floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="geometry/floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 8, 0 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="geometry/floor"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.22928e-06, 8, 65 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="geometry/floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 8, 0 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="geometry/floor"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.22928e-06, 8, -65 )
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="geometry/floor"]
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="planterCap3" parent="geometry" instance=ExtResource( 3 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3, 0, -8 )
+
+[node name="planterCap2" parent="geometry" instance=ExtResource( 3 )]
+transform = Transform( -0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -4, 0, -2 )
+
+[node name="planterCap4" parent="geometry" instance=ExtResource( 3 )]
+transform = Transform( 6.55671e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, 6.55671e-08, 1, 0, -5 )
+
+[node name="planterCap5" parent="geometry" instance=ExtResource( 3 )]
+transform = Transform( -1.09278e-07, 0, 0.5, 0, 0.5, 0, -0.5, 0, -1.09278e-07, -4, 0, -6 )
+
+[node name="planterCorner" parent="geometry" instance=ExtResource( 4 )]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0, -3 )
+
+[node name="planterCorner12" parent="geometry" instance=ExtResource( 4 )]
+transform = Transform( -2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -4, 0, -3 )
+
+[node name="planterCorner2" parent="geometry" instance=ExtResource( 4 )]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0, -7 )
+
+[node name="planterCorner10" parent="geometry" instance=ExtResource( 4 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -6 )
+
+[node name="planterCorner8" parent="geometry" instance=ExtResource( 4 )]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 1, -7 )
+
+[node name="planterCorner3" parent="geometry" instance=ExtResource( 4 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -8 )
+
+[node name="planterCorner6" parent="geometry" instance=ExtResource( 4 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, -8 )
+
+[node name="planterCorner4" parent="geometry" instance=ExtResource( 4 )]
+transform = Transform( -2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -2, 0, -8 )
+
+[node name="planterCorner7" parent="geometry" instance=ExtResource( 4 )]
+transform = Transform( -2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -2, 1, -8 )
+
+[node name="planterCorner5" parent="geometry" instance=ExtResource( 4 )]
+transform = Transform( -0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -2, 0, -7 )
+
+[node name="planterCorner9" parent="geometry" instance=ExtResource( 4 )]
+transform = Transform( -0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -2, 1, -7 )
+
+[node name="planterMid" parent="geometry" instance=ExtResource( 5 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -4 )
+
+[node name="planterMid9" parent="geometry" instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -1, 0, -6 )
+
+[node name="planterMid10" parent="geometry" instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -2, 0, -6 )
+
+[node name="planterMid11" parent="geometry" instance=ExtResource( 5 )]
+transform = Transform( -0.5, 0, 4.37114e-08, 0, 0.5, 0, -4.37114e-08, 0, -0.5, -3, 0, -7 )
+
+[node name="planterMid2" parent="geometry" instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -1, 0, -3 )
+
+[node name="planterMid5" parent="geometry" instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -1, 0, -7 )
+
+[node name="planterMid7" parent="geometry" instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -1, 1, -7 )
+
+[node name="planterMid6" parent="geometry" instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -1, 0, -8 )
+
+[node name="planterMid8" parent="geometry" instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -1, 1, -8 )
+
+[node name="planterMid3" parent="geometry" instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -2, 0, -3 )
+
+[node name="planterMid12" parent="geometry" instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -3, 0, -3 )
+
+[node name="planter4" parent="geometry" instance=ExtResource( 6 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, 0, -9 )
+
+[node name="planter6" parent="geometry" instance=ExtResource( 6 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4, 0, -9 )
+
+[node name="planter3" parent="geometry" instance=ExtResource( 6 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -8 )
+
+[node name="planter5" parent="geometry" instance=ExtResource( 6 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -2 )
+
+[node name="bench" parent="geometry" instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.999167, 2.38419e-07, -4.99313 )
+
+[node name="bench8" parent="geometry" instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.98996, 2.38419e-07, -7.99196 )
+
+[node name="bench6" parent="geometry" instance=ExtResource( 7 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1, 0, -9 )
+
+[node name="bench7" parent="geometry" instance=ExtResource( 7 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 0, -9 )
+
+[node name="bench2" parent="geometry" instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 0, -3 )
+
+[node name="bench4" parent="geometry" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2 )
+
+[node name="bench5" parent="geometry" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2 )
+
+[node name="bench3" parent="geometry" instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 0, -6 )
+
+[node name="planterTJoint" parent="geometry" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -5 )
+
+[node name="planterTJoint2" parent="geometry" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3, 0, -6 )
+
+[node name="Node2" type="Node" parent="."]
+
+[node name="Player" parent="Node2" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
+
+[node name="projectiles" type="Spatial" parent="."]
+script = ExtResource( 10 )

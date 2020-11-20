@@ -1,0 +1,189 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://scripts/navMesh_enemy.gd" type="Script" id=1]
+[ext_resource path="res://scenes/animate/enemies/moai/moai.tres" type="ArrayMesh" id=2]
+[ext_resource path="res://addons/godot-behavior-tree-plugin/behavior_tree.gd" type="Script" id=3]
+[ext_resource path="res://addons/godot-behavior-tree-plugin/root_icon.png" type="Texture" id=4]
+[ext_resource path="res://addons/godot-behavior-tree-plugin/sequence.gd" type="Script" id=5]
+[ext_resource path="res://addons/godot-behavior-tree-plugin/sequence_icon.png" type="Texture" id=6]
+[ext_resource path="res://addons/godot-behavior-tree-plugin/EnemyAction.gd" type="Script" id=7]
+[ext_resource path="res://addons/godot-behavior-tree-plugin/action_icon.png" type="Texture" id=8]
+[ext_resource path="res://addons/godot-behavior-tree-plugin/enemy_condition.gd" type="Script" id=9]
+[ext_resource path="res://addons/godot-behavior-tree-plugin/condition_icon.png" type="Texture" id=10]
+[ext_resource path="res://addons/godot-behavior-tree-plugin/selector.gd" type="Script" id=11]
+[ext_resource path="res://addons/godot-behavior-tree-plugin/selector_icon.png" type="Texture" id=12]
+[ext_resource path="res://addons/godot-behavior-tree-plugin/blackboard.gd" type="Script" id=13]
+[ext_resource path="res://addons/godot-behavior-tree-plugin/blackboard_icon.png" type="Texture" id=14]
+[ext_resource path="res://scenes/items/weapons/shield/woodShield.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/items/weapons/shortSword/shortSword.tscn" type="PackedScene" id=16]
+
+[sub_resource type="BoxShape" id=6]
+
+extents = Vector3( 0.75, 0.75, 1.5 )
+
+[node name="navMesh_enemy" type="KinematicBody"]
+
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+axis_lock_linear_x = false
+axis_lock_linear_y = false
+axis_lock_linear_z = false
+axis_lock_angular_x = false
+axis_lock_angular_y = false
+axis_lock_angular_z = false
+collision/safe_margin = 0.001
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+navigationNode = null
+playerNode = null
+SPEED = 200.0
+Health = 10
+Arrival_Radius = 2.0
+Low_Health = 5
+
+[node name="CollisionShape" type="CollisionShape" parent="." index="0"]
+
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0 )
+shape = SubResource( 6 )
+disabled = false
+_sections_unfolded = [ "Transform" ]
+
+[node name="model1" type="MeshInstance" parent="." index="1"]
+
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = ExtResource( 2 )
+skeleton = NodePath("..")
+material/0 = null
+_sections_unfolded = [ "Geometry", "Transform", "material" ]
+
+[node name="BehaviorTree" type="Node" parent="." index="2"]
+
+editor/display_folded = true
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_icon": ExtResource( 4 )
+}
+
+[node name="BehaviorSequence" type="Node" parent="BehaviorTree" index="0"]
+
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="BehaviorAction" type="Node" parent="BehaviorTree/BehaviorSequence" index="0"]
+
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_icon": ExtResource( 8 )
+}
+Actor = NodePath("../../..")
+Action = "find"
+
+[node name="BehaviorCondition" type="Node" parent="BehaviorTree/BehaviorSequence" index="1"]
+
+script = ExtResource( 9 )
+__meta__ = {
+"_editor_icon": ExtResource( 10 )
+}
+Actor = NodePath("../../..")
+IsNot = false
+Action = "is_in_range"
+
+[node name="BehaviorSelector" type="Node" parent="BehaviorTree/BehaviorSequence/BehaviorCondition" index="0"]
+
+script = ExtResource( 11 )
+__meta__ = {
+"_editor_icon": ExtResource( 12 )
+}
+
+[node name="BehaviorCondition" type="Node" parent="BehaviorTree/BehaviorSequence/BehaviorCondition/BehaviorSelector" index="0"]
+
+script = ExtResource( 9 )
+__meta__ = {
+"_editor_icon": ExtResource( 10 )
+}
+Actor = NodePath("../../../../..")
+IsNot = true
+Action = "is_facing_target"
+
+[node name="BehaviorAction" type="Node" parent="BehaviorTree/BehaviorSequence/BehaviorCondition/BehaviorSelector/BehaviorCondition" index="0"]
+
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_icon": ExtResource( 8 )
+}
+Actor = NodePath("../../../..")
+Action = "face_target"
+
+[node name="BehaviorAction2" type="Node" parent="BehaviorTree/BehaviorSequence/BehaviorCondition/BehaviorSelector" index="1"]
+
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_icon": ExtResource( 8 )
+}
+Actor = NodePath("../../../../..")
+Action = "melee"
+
+[node name="BehaviorBlackboard" type="Node" parent="." index="3"]
+
+script = ExtResource( 13 )
+__meta__ = {
+"_editor_icon": ExtResource( 14 )
+}
+
+[node name="shield" type="Spatial" parent="." index="4"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1.2, -0.75 )
+visible = false
+_sections_unfolded = [ "Transform" ]
+
+[node name="shield" parent="shield" index="0" instance=ExtResource( 15 )]
+
+[node name="weapon" type="Spatial" parent="." index="5"]
+
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.5, 1, -0.7 )
+visible = false
+
+[node name="shortSword" parent="weapon" index="0" instance=ExtResource( 16 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+Owner = NodePath("../..")
+is_NPC = true
+dynamicCombat = false
+isBarbarian = false
+AnimationPlaybackSpeed = 1.0
+
+[node name="RayCast" type="RayCast" parent="." index="6"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.761126, 0 )
+enabled = false
+exclude_parent = true
+cast_to = Vector3( 0, -1, 0 )
+collision_mask = 1
+
+[node name="Tween" type="Tween" parent="." index="7"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[connection signal="tween_completed" from="Tween" to="." method="IncrementPathIndex"]
+
+[connection signal="tween_started" from="Tween" to="." method="TweenStarted"]
+
+
