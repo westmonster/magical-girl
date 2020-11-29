@@ -123,7 +123,6 @@ func NotAttacking():
 	attackBlocked = false
 	pass 
 
-
 func cycle_wand(wand_color):
 	match wand_color:
 		GIRL_RED:
