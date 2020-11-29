@@ -23,6 +23,9 @@ var _delta
 var is_firing = false
 var is_secondary = false
 
+const GIRL_RED = 0
+const GIRL_GRN = 1
+const GIRL_BLU = 2
 # var b = "textvar"
 
 func _ready():
@@ -121,7 +124,23 @@ func NotAttacking():
 	pass 
 
 
-
+func cycle_wand(wand_color):
+	match wand_color:
+		GIRL_RED:
+			$wand/wand_RED.show()
+			$wand/wand_GRN.hide()
+			$wand/wand_BLU.hide()
+			pass
+		GIRL_GRN:
+			$wand/wand_RED.hide()
+			$wand/wand_GRN.show()
+			$wand/wand_BLU.hide()
+			pass
+		GIRL_BLU:
+			$wand/wand_RED.hide()
+			$wand/wand_GRN.hide()
+			$wand/wand_BLU.show()
+			pass
 
 
 func _on_Timer_timeout():

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/mgWand_GRN_flower.obj-c8c168187ad7944bd4a936a220c39f2c.mesh"
+
+[deps]
+
+files=[ "res://.import/mgWand_GRN_flower.obj-c8c168187ad7944bd4a936a220c39f2c.mesh" ]
+
+source_file="res://scenes/items/weapons/mgWand/mgWand_GRN_flower.obj"
+dest_files=[ "res://.import/mgWand_GRN_flower.obj-c8c168187ad7944bd4a936a220c39f2c.mesh", "res://.import/mgWand_GRN_flower.obj-c8c168187ad7944bd4a936a220c39f2c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

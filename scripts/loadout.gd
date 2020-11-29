@@ -5,6 +5,9 @@ export(NodePath) var Owner
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+const GIRL_RED = 0
+const GIRL_GRN = 1
+const GIRL_BLU = 2
 
 
 # Called when the node enters the scene tree for the first time.
@@ -34,3 +37,8 @@ func _process(delta):
 	
 	if(Input.is_action_just_released("Player_SecondaryAction")):
 		pass
+	
+
+func cycle_wand(wand_color):
+	if($weapons.get_child(0).has_method("cycle_wand")):
+			$weapons.get_child(0).cycle_wand(wand_color)

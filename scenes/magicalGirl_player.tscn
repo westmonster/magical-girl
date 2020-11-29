@@ -65,6 +65,7 @@ FOV = 90.0
 walk_speed = 15
 sprint_speed = 20
 jump_height = 15
+current_girl = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 1 )
@@ -365,7 +366,7 @@ align = 1
 [node name="RayCast" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 enabled = true
-cast_to = Vector3( 0, -10, 0 )
+cast_to = Vector3( 0, -15.006, 0 )
 script = ExtResource( 21 )
 
 [node name="Shadow" type="Sprite3D" parent="RayCast"]

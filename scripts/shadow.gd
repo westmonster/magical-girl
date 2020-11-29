@@ -15,11 +15,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	air = (get_collision_point() - global_transform.origin).length()
-	if(is_colliding()):
-		$Shadow.opacity = 1-(air  / 10)
+	if is_colliding():
+		$Shadow.opacity = 1-(air / 10)
 		$Shadow.scale = Vector3(1,1,1)-(Vector3(air,air,0)/10)
 		#prints("Shadow opacity:", $Shadow.opacity)
 	else:
-		$Shadow.opacity = 0
-		$Shadow.scale = Vector3(0,0,1)
+		$Shadow.opacity = 0.1
+		$Shadow.scale = Vector3(0.1,0.1,1)
 	pass

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/mgWand_GRN.obj-1272f84eff52a7f7ded6b73fd74efaf2.mesh"
+
+[deps]
+
+files=[ "res://.import/mgWand_GRN.obj-1272f84eff52a7f7ded6b73fd74efaf2.mesh" ]
+
+source_file="res://scenes/items/weapons/mgWand/mgWand_GRN.obj"
+dest_files=[ "res://.import/mgWand_GRN.obj-1272f84eff52a7f7ded6b73fd74efaf2.mesh", "res://.import/mgWand_GRN.obj-1272f84eff52a7f7ded6b73fd74efaf2.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

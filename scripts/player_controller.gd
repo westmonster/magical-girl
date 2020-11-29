@@ -33,6 +33,15 @@ export(int) var fly_accel = 4
 var flying := false
 
 
+const GIRL_RED = 0
+const GIRL_GRN = 1
+const GIRL_BLU = 2
+export(int, "Red Girl", "Green Girl", "Blue Girl") var current_girl 
+var can_dbl_jump = true
+var can_air_dash = true
+var can_parasol  = true
+onready var default_grav = gravity
+
 ##################################################
 
 # Called when the node enters the scene tree
@@ -77,13 +86,46 @@ func walk(delta: float) -> void:
 	direction.y = 0
 	direction = direction.normalized()
 	
+	if Input.is_action_just_pressed("Player_cycle_girl_backward"):
+		cycle_girl_bwd()
+	if Input.is_action_just_pressed("Player_cycle_girl_forward"):
+		cycle_girl_fwd()
+	
 	# Jump
 	var _snap: Vector3
-	if is_on_floor():
-		_snap = Vector3(0, -1, 0)
-		if Input.is_action_just_pressed("Player_Jump"):
+	
+	_snap = Vector3(0, -1, 0)
+	if Input.is_action_just_pressed("Player_Jump"):
+		if is_on_floor():
 			_snap = Vector3(0, 0, 0)
 			velocity.y = jump_height
+			can_dbl_jump = true
+			can_air_dash = true
+			can_parasol  = true
+			gravity = default_grav
+		# Secondary movement abilities
+		if not is_on_floor():
+			match current_girl:
+				GIRL_RED:
+					if can_dbl_jump:
+						_snap = Vector3(0, 0, 0)
+						velocity.y = jump_height
+						can_dbl_jump = false
+				GIRL_GRN:
+					if can_air_dash:
+						can_air_dash = false
+						velocity = direction * 40
+						velocity.y = 5
+						#prints("velocity: ", velocity.length())
+						pass
+				GIRL_BLU:
+					if not can_parasol:
+						gravity = default_grav
+					if can_parasol:
+						gravity = gravity/3
+					can_parasol = false
+					#prints("gravity: ", gravity)
+		#prints("can double jump: ", can_dbl_jump)
 	
 	# Apply Gravity
 	velocity.y -= gravity * delta
@@ -175,3 +217,35 @@ func camera_rotation() -> void:
 
 func can_sprint() -> bool:
 	return (sprint_enabled and is_on_floor())
+
+func cycle_girl_fwd():
+	match current_girl:
+		GIRL_RED:
+			current_girl = GIRL_GRN
+			can_parasol = true
+		
+		GIRL_GRN:
+			current_girl = GIRL_BLU
+			can_dbl_jump = true
+		
+		GIRL_BLU:
+			gravity = default_grav
+			current_girl = GIRL_RED
+			can_air_dash = true
+	get_node(cam_path).get_node("loadout").cycle_wand(current_girl)
+	
+func cycle_girl_bwd():
+	match current_girl:
+		GIRL_RED:
+			current_girl = GIRL_BLU
+			can_dbl_jump = true
+		
+		GIRL_GRN:
+			current_girl = GIRL_RED
+			can_air_dash = true
+		
+		GIRL_BLU:
+			gravity = default_grav
+			current_girl = GIRL_GRN
+			can_parasol = true
+	get_node(cam_path).get_node("loadout").cycle_wand(current_girl)
