@@ -1,0 +1,63 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scripts/projectile.gd" type="Script" id=1]
+[ext_resource path="res://sounds/pop.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/items/projectiles/petal/0007.png" type="Texture" id=4]
+[ext_resource path="res://scenes/items/projectiles/petal/0002.png" type="Texture" id=5]
+[ext_resource path="res://scenes/items/projectiles/petal/0010.png" type="Texture" id=6]
+[ext_resource path="res://scenes/items/projectiles/petal/0006.png" type="Texture" id=7]
+[ext_resource path="res://scenes/items/projectiles/petal/0008.png" type="Texture" id=8]
+[ext_resource path="res://scenes/items/projectiles/petal/0009.png" type="Texture" id=9]
+[ext_resource path="res://scenes/items/projectiles/petal/0005.png" type="Texture" id=10]
+[ext_resource path="res://scenes/items/projectiles/petal/0004.png" type="Texture" id=11]
+[ext_resource path="res://scenes/items/projectiles/petal/0003.png" type="Texture" id=12]
+[ext_resource path="res://scenes/items/projectiles/petal/0001.png" type="Texture" id=13]
+
+[sub_resource type="SphereShape" id=1]
+radius = 0.0539665
+
+[sub_resource type="SphereShape" id=2]
+radius = 0.15
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 13 ), ExtResource( 5 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="petal" type="KinematicBody" groups=[
+"projectiles",
+]]
+collision_layer = 2147483652
+collision_mask = 2147483652
+script = ExtResource( 1 )
+projectileName = "bubble"
+maxDistanceInUnits = 128.0
+damage = 5
+damagePastBlade = false
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+playback_process_mode = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -4.0
+
+[node name="projectile" type="Area" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="projectile"]
+shape = SubResource( 2 )
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="projectile"]
+cast_shadow = 0
+pixel_size = 0.006
+frames = SubResource( 3 )
+playing = true
+[connection signal="body_entered" from="projectile" to="." method="_on_projectile_body_entered"]

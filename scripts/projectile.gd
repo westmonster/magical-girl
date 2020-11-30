@@ -23,23 +23,29 @@ func _ready():
 	#set_physics_process(true)
 	pass
   
-#func _physics_process(delta):
+func _physics_process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	if is_on_ceiling() or is_on_floor() or is_on_wall():
 #		kill()
 #	pass
+	look_at(get_viewport().get_camera().global_transform.origin,Vector3(0,1,0))
 
 func fire(dir,vel):
 	direction = dir#Vector3(sin(dir.y),-fallRate,cos(dir.y))
 	start_point = translation
 	get_node("AudioStreamPlayer").play()
+	$projectile/AnimatedSprite3D.frame = randi() % 10
 	#prints("direction ", dVec)
 	#prints("velocity: ", vel.length())
 	#velocity = Vector3(vel.x,vel.y,vel.z)#.length()+speedInUnitsPerSecond+5
 	#prints((vel * 2 * clamp(direction.dot(vel.normalized()),0,1)))
-	velocity = (direction * speedInUnitsPerSecond) + (vel.project(direction))#(vel * 2 * clamp(vel.dot(direction),0,1))
-	#velocity = (direction * speedInUnitsPerSecond) + (vel * (clamp(direction.dot(vel),0,1)))
+	#velocity = (direction * speedInUnitsPerSecond) + (vel.project(direction))#(vel * 2 * clamp(vel.dot(direction),0,1))
+	
+	#I have tried many different ways to handle projectile movement
+	#This is the way
+	velocity = (direction * speedInUnitsPerSecond) + (vel.project(direction) * (clamp(direction.dot(vel),0,1)))
+	
 	#velocity = (direction * speedInUnitsPerSecond) + vel
 	#velocity = (direction * speedInUnitsPerSecond) 
 	#$Tween.interpolate_property(self,"translation",start_point,start_point + (dir*maxDistanceInUnits), duration, 0, 1, 0)

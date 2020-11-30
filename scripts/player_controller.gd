@@ -48,6 +48,7 @@ onready var default_grav = gravity
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	cam.fov = FOV
+	$Head/Camera/loadout.cycle_wand(current_girl)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame
