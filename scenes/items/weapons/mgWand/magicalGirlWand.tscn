@@ -397,11 +397,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.183375, -0.41062 )
 
 [node name="muzzlemuzzlevisualizer" type="MeshInstance" parent="muzzle/muzzle"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+visible = false
 mesh = SubResource( 13 )
 material/0 = SubResource( 14 )
 
 [node name="muzzlevisualizer" type="MeshInstance" parent="muzzle"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+visible = false
 mesh = SubResource( 13 )
 material/0 = SubResource( 15 )
 

@@ -11,10 +11,15 @@ func _ready():
 	hide()
 
 func _input(event):
-	if Input.is_action_pressed("ui_cancel"):
-		hide()
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		get_tree().paused = false
+	if Input.is_action_just_pressed("ui_cancel"):
+		if visible:
+			hide()
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			get_tree().paused = false
+		else:
+			show()
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			get_tree().paused = true
 
 func ViewportSizeChanged():
 	#In most cases I usually don't like to create variables in a function. I like to make the variables at the top of 

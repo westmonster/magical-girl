@@ -308,6 +308,7 @@ transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -39, 0, 2
 
 [node name="Player" parent="players" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.8685, -5.3366 )
+current_girl = 0
 
 [node name="projectiles" type="Spatial" parent="."]
 script = ExtResource( 10 )
