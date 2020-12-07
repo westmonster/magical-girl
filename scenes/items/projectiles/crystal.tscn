@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/projectile.gd" type="Script" id=1]
+[ext_resource path="res://sounds/pop.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/items/projectiles/crystal.tres" type="Material" id=3]
+[ext_resource path="res://scenes/items/projectiles/crystal.obj" type="ArrayMesh" id=4]
+
+[sub_resource type="SphereShape" id=1]
+radius = 0.0539665
+
+[sub_resource type="SphereShape" id=2]
+radius = 0.15
+
+[node name="crystal" type="KinematicBody" groups=[
+"projectiles",
+]]
+collision_layer = 2147483652
+collision_mask = 2147483652
+script = ExtResource( 1 )
+projectileName = "crystal"
+maxDistanceInUnits = 128.0
+damage = 5
+damagePastBlade = false
+spin = true
+play_audio = false
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+playback_process_mode = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -4.0
+
+[node name="projectile" type="Area" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="projectile"]
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="projectile"]
+transform = Transform( -1.25, 0, 1.50996e-07, 0, 1.25, 0, -1.88745e-07, 0, -1, 0, 0, 0 )
+layers = 2147483649
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 3 )
+[connection signal="body_entered" from="projectile" to="." method="_on_projectile_body_entered"]

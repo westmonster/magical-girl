@@ -32,15 +32,20 @@ export(int) var fly_speed = 10
 export(int) var fly_accel = 4
 var flying := false
 
+export(Array) var health = [100, 100, 100]
 
 const GIRL_RED = 0
 const GIRL_GRN = 1
 const GIRL_BLU = 2
 export(int, "Red Girl", "Green Girl", "Blue Girl") var current_girl 
+var prev_girl = current_girl
 var can_dbl_jump = true
 var can_air_dash = true
 var can_parasol  = true
 onready var default_grav = gravity
+
+var current_state = "idle"
+signal current_state(state)
 
 ##################################################
 
@@ -49,6 +54,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	cam.fov = FOV
 	$Head/Camera/loadout.cycle_wand(current_girl)
+	prints("Player node: ", self)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame
@@ -74,6 +80,8 @@ func _input(event: InputEvent) -> void:
 
 func walk(delta: float) -> void:
 	# Input
+	
+	
 	direction = Vector3()
 	var aim: Basis = get_global_transform().basis
 	if move_axis.x >= 0.5:
@@ -88,9 +96,39 @@ func walk(delta: float) -> void:
 	direction = direction.normalized()
 	
 	if Input.is_action_just_pressed("Player_cycle_girl_backward"):
-		cycle_girl_bwd()
+		cycle_girl_bwd(current_girl)
 	if Input.is_action_just_pressed("Player_cycle_girl_forward"):
-		cycle_girl_fwd()
+		cycle_girl_fwd(current_girl)
+	
+	# Handle weapon anims
+	if is_on_floor():
+		if direction == Vector3(0,0,0):
+			if !current_state == "idle":
+				current_state = "idle"
+				emit_signal("current_state", "idle")
+				prints("Current state: idle")
+		else:
+			if (Input.is_action_pressed("move_sprint") and can_sprint() and move_axis.x >= 0.5):
+				if !current_state == "run":
+					current_state = "run"
+					emit_signal("current_state", "run")
+					prints("Current state: Run")
+			else:
+				if !current_state == "walk":
+					current_state = "walk"
+					emit_signal("current_state", "walk")
+					prints("Current state: walk")
+	else:
+		if velocity.y > 0:
+			if !current_state == "ascend":
+				current_state = "ascend"
+				emit_signal("current_state", "ascend")
+				prints("Current state: ascend")
+		if velocity.y < 0:
+			if !current_state == "descend":
+				current_state = "descend"
+				emit_signal("current_state", "descend")
+				prints("Current state: descend")
 	
 	# Jump
 	var _snap: Vector3
@@ -219,34 +257,94 @@ func camera_rotation() -> void:
 func can_sprint() -> bool:
 	return (sprint_enabled and is_on_floor())
 
-func cycle_girl_fwd():
-	match current_girl:
+func cycle_girl_fwd(_current_girl):
+	match _current_girl:
 		GIRL_RED:
-			current_girl = GIRL_GRN
-			can_parasol = true
+			if health[GIRL_GRN] > 0:
+				current_girl = GIRL_GRN
+				can_parasol = true
+			else: cycle_girl_fwd(GIRL_GRN)
 		
 		GIRL_GRN:
-			current_girl = GIRL_BLU
-			can_dbl_jump = true
+			if health[GIRL_BLU] > 0:
+				current_girl = GIRL_BLU
+				can_dbl_jump = true
+			else: cycle_girl_fwd(GIRL_BLU)
 		
 		GIRL_BLU:
 			gravity = default_grav
-			current_girl = GIRL_RED
-			can_air_dash = true
+			if health[GIRL_RED] > 0:
+				current_girl = GIRL_RED
+				can_air_dash = true
+			else: cycle_girl_fwd(GIRL_RED)
 	get_node(cam_path).get_node("loadout").cycle_wand(current_girl)
 	
-func cycle_girl_bwd():
-	match current_girl:
+func cycle_girl_bwd(_current_girl):
+	match _current_girl:
 		GIRL_RED:
-			current_girl = GIRL_BLU
-			can_dbl_jump = true
+			if health[GIRL_BLU] > 0:
+				current_girl = GIRL_BLU
+				can_dbl_jump = true
+			else: cycle_girl_bwd(GIRL_BLU)
 		
 		GIRL_GRN:
-			current_girl = GIRL_RED
-			can_air_dash = true
+			if health[GIRL_RED] > 0:
+				current_girl = GIRL_RED
+				can_air_dash = true
+			else: cycle_girl_bwd(GIRL_RED)
 		
 		GIRL_BLU:
 			gravity = default_grav
-			current_girl = GIRL_GRN
-			can_parasol = true
+			if health[GIRL_GRN] > 0:
+				current_girl = GIRL_GRN
+				can_parasol = true
+			else: cycle_girl_bwd(GIRL_GRN)
 	get_node(cam_path).get_node("loadout").cycle_wand(current_girl)
+
+func cycle_girl(_prev_girl):
+	if health == [0,0,0]:
+		die()
+	match _prev_girl:
+		GIRL_RED:
+			gravity = default_grav
+			if health[GIRL_RED] > 0:
+				current_girl = GIRL_RED
+				can_air_dash = true
+			else: 
+				if current_girl == GIRL_GRN:
+					cycle_girl(GIRL_BLU)
+				else:
+					cycle_girl(GIRL_GRN)
+		
+		GIRL_GRN:
+			gravity = default_grav
+			if health[GIRL_GRN] > 0:
+				current_girl = GIRL_GRN
+				can_parasol = true
+			else:
+				if current_girl == GIRL_RED:
+					cycle_girl(GIRL_BLU)
+				else:
+					cycle_girl(GIRL_RED)
+		
+		GIRL_BLU:
+			gravity = default_grav
+			if health[GIRL_BLU] > 0:
+				current_girl = GIRL_BLU
+				can_dbl_jump = true
+			else:
+				if current_girl == GIRL_RED:
+					cycle_girl(GIRL_GRN)
+				else:
+					cycle_girl(GIRL_RED)
+	get_node(cam_path).get_node("loadout").cycle_wand(current_girl)
+	pass
+
+func damage(damage):
+	health[current_girl] -= damage
+	if health[current_girl] <= 0:
+		health[current_girl] = 0
+		cycle_girl(prev_girl)
+
+func die():
+	pass

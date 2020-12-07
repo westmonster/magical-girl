@@ -11,6 +11,9 @@ export(float) 	var speedInUnitsPerSecond	= 20.0
 export(float)	var fallRate				= 0.0
 export(int)		var damage					= 10
 export(bool)	var damagePastBlade			= true
+export(bool)	var sprite					= false
+export(bool)	var spin					= false
+export(bool)	var play_audio				= true
 var Owner
 var duration = maxDistanceInUnits/speedInUnitsPerSecond
 var direction
@@ -20,7 +23,7 @@ var velocity
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	#set_physics_process(true)
+	set_physics_process(true)
 	pass
   
 func _physics_process(delta):
@@ -29,13 +32,18 @@ func _physics_process(delta):
 #	if is_on_ceiling() or is_on_floor() or is_on_wall():
 #		kill()
 #	pass
-	look_at(get_viewport().get_camera().global_transform.origin,Vector3(0,1,0))
+	if sprite:
+		look_at(get_viewport().get_camera().global_transform.origin,Vector3(0,1,0))
+	if spin:
+		$projectile.rotate_z(delta)
 
 func fire(dir,vel):
 	direction = dir#Vector3(sin(dir.y),-fallRate,cos(dir.y))
 	start_point = translation
-	get_node("AudioStreamPlayer").play()
-	$projectile/AnimatedSprite3D.frame = randi() % 10
+	if play_audio:
+		get_node("AudioStreamPlayer").play()
+	if sprite:
+		$projectile/AnimatedSprite3D.frame = randi() % 10
 	#prints("direction ", dVec)
 	#prints("velocity: ", vel.length())
 	#velocity = Vector3(vel.x,vel.y,vel.z)#.length()+speedInUnitsPerSecond+5

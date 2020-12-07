@@ -6,6 +6,7 @@ export(float) var		refactory_time	= 0.07
 export(float) var		second_ref_time	= 0.44
 export(NodePath) var	loadout_path
 export(PackedScene) var	petal
+export(PackedScene) var	crystal
 export(bool)	 var	is_NPC				= false
 export(bool)	 var	primaryPlayAudio	= false
 export(bool)	 var	secondaryPlayAudio	= false
@@ -19,6 +20,7 @@ var						dynamicCombat	= false
 var _delta
 var is_firing = false
 var is_secondary = false
+var current_anim = "idle"
 
 const RED = 0
 const GRN = 1
@@ -41,14 +43,16 @@ func _ready():
 
 func _physics_process(delta):
 	_delta = delta
-	if !get_node("AnimationPlayer").is_playing():
-		get_node("AnimationPlayer").play("idle")
 	
+	if !$AnimationPlayer.is_playing():
+		$AnimationPlayer.play(current_anim)
+		
 	if !busy: 
 		if($muzzle/muzzle.rotation.x > 0):
 			$muzzle/muzzle.rotate_x(delta/-12)
 		if($muzzle/muzzle.rotation.x < 0):
 			$muzzle/muzzle.rotation.x = 0
+		
 	pass
 	#if attack:
 	#	var bodies = get_node("col").get_overlapping_bodies()
@@ -81,7 +85,7 @@ func Fire(_owner):
 			pass
 		BLU:
 			for x in range(8):
-				var prj = petal.instance()
+				var prj = crystal.instance()
 				prj.Owner = _owner
 				var __owner = get_node(loadout_path).get_node(_owner)
 				$muzzle/muzzle.rotation.x = randf() * 0.15
@@ -155,6 +159,9 @@ func cycle_wand(wand_color):
 			$wand/wand_BLU.show()
 			pass
 
+func change_state(state):
+	current_anim = state
+	prints("Current Weapon State: ", state)
 
 func _on_Timer_timeout():
 	#prints("done firing!")

@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/0005.png-c4025992dada8982c9c00ed77dd8de57.s3tc.stex"
-path.etc2="res://.import/0005.png-c4025992dada8982c9c00ed77dd8de57.etc2.stex"
+path="res://.import/0005.png-c4025992dada8982c9c00ed77dd8de57.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://scenes/items/projectiles/petal/0005.png"
-dest_files=[ "res://.import/0005.png-c4025992dada8982c9c00ed77dd8de57.s3tc.stex", "res://.import/0005.png-c4025992dada8982c9c00ed77dd8de57.etc2.stex" ]
+dest_files=[ "res://.import/0005.png-c4025992dada8982c9c00ed77dd8de57.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
@@ -27,7 +25,7 @@ flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=1
 process/fix_alpha_border=true
-process/premult_alpha=false
+process/premult_alpha=true
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false

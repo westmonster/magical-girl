@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/crystal.obj-7f44ca3498b7394f296dfff6d52afcec.mesh"
+
+[deps]
+
+files=[ "res://.import/crystal.obj-7f44ca3498b7394f296dfff6d52afcec.mesh" ]
+
+source_file="res://scenes/items/projectiles/crystal.obj"
+dest_files=[ "res://.import/crystal.obj-7f44ca3498b7394f296dfff6d52afcec.mesh", "res://.import/crystal.obj-7f44ca3498b7394f296dfff6d52afcec.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
