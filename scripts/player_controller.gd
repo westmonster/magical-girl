@@ -108,7 +108,7 @@ func walk(delta: float) -> void:
 				emit_signal("current_state", "idle")
 				prints("Current state: idle")
 		else:
-			if (Input.is_action_pressed("move_sprint") and can_sprint() and move_axis.x >= 0.5):
+			if (Input.is_action_pressed("Player_Shift") and can_sprint() and move_axis.x >= 0.5):
 				if !current_state == "run":
 					current_state = "run"
 					emit_signal("current_state", "run")
@@ -171,7 +171,7 @@ func walk(delta: float) -> void:
 	
 	# Sprint
 	var _speed: int
-	if (Input.is_action_pressed("move_sprint") and can_sprint() and move_axis.x >= 0.5):
+	if (Input.is_action_pressed("Player_Shift") and can_sprint() and move_axis.x >= 0.5):
 		_speed = sprint_speed
 		cam.set_fov(lerp(cam.fov, FOV * 1.05, delta * 8))
 		sprinting = true

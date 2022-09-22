@@ -189,7 +189,7 @@ func _make_bone_nodes():
 	# Remove all of the old bone nodes
 	# TODO: (not a huge concern, as these can be removed in the editor)
 	
-for bone in range(0, bones_in_chain.size()):
+	for bone in range(0, bones_in_chain.size()):
 		
 		var bone_name = bones_in_chain[bone]
 		if has_node(bone_name) == false:

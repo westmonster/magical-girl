@@ -350,7 +350,6 @@ transform = Transform( 1, 2.98023e-08, 7.10543e-15, -2.98023e-08, 1, 0, 0, 0, 1,
 visible = false
 use_in_baked_light = true
 mesh = ExtResource( 2 )
-material/0 = null
 
 [node name="Sprite3D" type="Sprite3D" parent="wand/wand_RED"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0 )
@@ -366,7 +365,6 @@ transform = Transform( 1, 4.03897e-28, 1.98952e-13, 0, 1, 0, -1.27898e-13, 3.552
 visible = false
 use_in_baked_light = true
 mesh = SubResource( 2 )
-material/0 = null
 
 [node name="Sprite3D" type="Sprite3D" parent="wand/wand_GRN"]
 transform = Transform( 1, 2.98023e-08, 0, -2.98023e-08, 1, 2.84217e-14, 0, 4.23516e-22, 1, -0.00342067, -0.248976, -1.35042e-08 )
@@ -380,13 +378,11 @@ texture = ExtResource( 8 )
 [node name="flower" type="MeshInstance" parent="wand/wand_GRN"]
 transform = Transform( 0.999999, -2.98022e-08, -1.20792e-13, 2.98022e-08, 0.999999, 7.10546e-15, 1.20792e-13, -7.10546e-15, 1, 0, 0.24, 0 )
 mesh = SubResource( 5 )
-material/0 = null
 
 [node name="wand_BLU" type="MeshInstance" parent="wand"]
 transform = Transform( 1, 0, 1.91847e-13, 0, 1, -7.10543e-15, -1.27898e-13, 3.55271e-15, 1, -3.72529e-09, 0.1, 0 )
 use_in_baked_light = true
 mesh = SubResource( 6 )
-material/0 = null
 
 [node name="Sprite3D" type="Sprite3D" parent="wand/wand_BLU"]
 transform = Transform( 1, 0, -7.10543e-15, 0, 1, 1.42109e-14, 1.42109e-14, 1.42109e-14, 1, 3.72529e-09, -0.249, -1.77636e-15 )
@@ -400,7 +396,6 @@ texture = ExtResource( 9 )
 [node name="MeshInstance" type="MeshInstance" parent="wand/wand_BLU"]
 visible = false
 mesh = SubResource( 19 )
-material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_default_blend_time = 0.25
@@ -441,5 +436,6 @@ one_shot = true
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.581908, 0.358348, 0.730048, -0.804915, 0.382011, 0.454071, -0.116171, -0.851854, 0.510734, 0, 1.23097, 0 )
 visible = false
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="secondaryTimer" to="." method="_on_secondaryTimer_timeout"]

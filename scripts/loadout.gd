@@ -17,10 +17,12 @@ var _current_wand
 func _ready():
 	_current_wand = "weapons/magicalGirlWand%s" % current_wand
 	cycle_wand(current_wand)
-	for i in $weapons.get_children():
-		i.connect("current_state", get_node(Owner), "change_state")
-		prints("Connected node: ", i, " to ", get_node(Owner))
-	pass # Replace with function body.
+	
+	# NOTE: not sure what the following did but there's no hint of the functions or signals anymore
+#	for i in $weapons.get_children():
+#		i.connect("current_state", get_node(Owner), "change_state")
+#		prints("Connected node: ", i, " to ", get_node(Owner))
+#	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
