@@ -54,22 +54,23 @@ func _on_trigger_body_entered(body):
 		occupied = true
 		#print(occupied)
 		if Locked:
-			if RequiresKey == 3:
-				if body.ylwKeys > 0:
-					body.AddKeys( "yellow", -1)
-					Locked = false
-			if RequiresKey == 2:
-				if body.bluKeys > 0:
-					body.AddKeys( "blue", -1)
-					Locked = false
-			if RequiresKey == 1:
-				if body.redKeys > 0:
-					body.AddKeys( "red", -1)
-					Locked = false
-			if RequiresKey == 0:
-				if body.whtKeys > 0:
-					body.AddKeys( "white", -1)
-					Locked = false
+			match RequiresKey:
+				3:
+					if body.ylwKeys > 0:
+						body.AddKeys( "yellow", -1)
+						Locked = false
+				2:
+					if body.bluKeys > 0:
+						body.AddKeys( "blue", -1)
+						Locked = false
+				1:
+					if body.redKeys > 0:
+						body.AddKeys( "red", -1)
+						Locked = false
+				0:
+					if body.whtKeys > 0:
+						body.AddKeys( "white", -1)
+						Locked = false
 		if !Locked:
 			if(body!=get_node("col")):
 				if AutoOpen:

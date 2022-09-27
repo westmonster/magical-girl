@@ -170,7 +170,7 @@ onready var muzzle		= get_node("Camera_Main/loadout/muzzle")
 # The projectile to shoot from the muzzle
 export(String, "arrow", "blade", "magic", "force") var Projectile	= "force"
 var projectile
-var potionProjectile = preload("res://scenes/items/projectiles/potion_projectile.tscn")
+var potionProjectile = load("res://scenes/items/projectiles/potion_projectile.tscn")
 
 #########################
 #		STATES			#

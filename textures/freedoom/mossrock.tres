@@ -1,8 +1,0 @@
-[gd_resource type="StreamTexture" format=2]
-
-[resource]
-
-flags = 18
-load_path = "res://.import/mossrock.png-d353d1eb29234017663826843d26c232.stex"
-_sections_unfolded = [ "Resource" ]
-

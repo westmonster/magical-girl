@@ -3,14 +3,14 @@ extends Spatial
 
 #Switch to allow or disallow the instancing of the collision spheres.
 var Coll_Sphere_Switch = false
-var potion	 = preload("res://scenes/items/pickups/potion/potion.tscn")
-var meat	 = preload("res://scenes/items/pickups/food/food.tscn")
-var treasure = preload("res://scenes/items/pickups/treasure/treasure.tscn")
-var whtKey	 = preload("res://scenes/items/pickups/key/key.tscn")
-var redKey	 = preload("res://scenes/items/pickups/key/red_key.tscn")
-var bluKey	 = preload("res://scenes/items/pickups/key/blu_key.tscn")
-var ylwKey	 = preload("res://scenes/items/pickups/key/ylw_key.tscn")
-var rngKey	 = preload("res://scenes/items/pickups/key/key_ring.tscn")
+var potion	 = load("res://scenes/items/pickups/potion/potion.tscn")
+var meat	 = load("res://scenes/items/pickups/food/food.tscn")
+var treasure = load("res://scenes/items/pickups/treasure/treasure.tscn")
+var whtKey	 = load("res://scenes/items/pickups/key/key.tscn")
+var redKey	 = load("res://scenes/items/pickups/key/red_key.tscn")
+var bluKey	 = load("res://scenes/items/pickups/key/blu_key.tscn")
+var ylwKey	 = load("res://scenes/items/pickups/key/ylw_key.tscn")
+var rngKey	 = load("res://scenes/items/pickups/key/key_ring.tscn")
 
 var itemList = {"potion":potion,"meat":meat,"treasure":treasure,"whtKey":whtKey,"redKey":redKey,"bluKey":bluKey,"ylwKey":ylwKey,"rngKey":rngKey}
 

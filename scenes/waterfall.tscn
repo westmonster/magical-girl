@@ -85,7 +85,6 @@ size = Vector2( 0.1, 0.1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11107, 0 )
 material_override = ExtResource( 1 )
 mesh = SubResource( 1 )
-material/0 = null
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 mesh = SubResource( 2 )
@@ -125,3 +124,5 @@ fixed_fps = 60
 process_material = SubResource( 10 )
 draw_pass_1 = SubResource( 11 )
 
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, 0.612372, -0.353553, 0, 0.5, 0.866025, 0.707107, -0.612372, 0.353553, 0, 4, 0 )

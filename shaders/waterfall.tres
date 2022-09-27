@@ -40,4 +40,3 @@ shader_param/bottom_foam_threshold = 0.425
 shader_param/speed = 0.25
 shader_param/noise_tex = ExtResource( 2 )
 shader_param/displ_tex = ExtResource( 1 )
-

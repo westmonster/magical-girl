@@ -1,8 +1,0 @@
-[gd_resource type="StreamTexture" format=2]
-
-[resource]
-
-flags = 2
-load_path = "res://.import/brick1.png-17d8a06e96bc482070b731fd6cb57219.stex"
-_sections_unfolded = [ "Resource" ]
-
